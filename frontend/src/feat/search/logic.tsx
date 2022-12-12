@@ -19,8 +19,8 @@ export const useLogic = ({ inputRef }: UseLogicProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    GetImages({ query: searchReq }).then(({ data }) => {
-			setImages(data);
+    GetImages({ query: searchReq, size: 0 }).then(({ photos }) => {
+			setImages(photos);
     });
   };
 
