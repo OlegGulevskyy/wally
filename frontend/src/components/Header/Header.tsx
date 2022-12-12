@@ -1,8 +1,8 @@
 import { ActionIcon, Container, Group, Header } from "@mantine/core";
 import { IconBrandGithub } from "@tabler/icons";
-import { Searchbar } from "../SearchBar";
+import { Searchbar } from "../../feat/search";
 import { ThemeToggle } from "../ThemeToggle";
-import { ICON_SIZE } from "./const";
+import { HEADER_HEIGHT, ICON_SIZE } from "./const";
 
 const GithubButton = () => {
   return (
@@ -14,7 +14,7 @@ const GithubButton = () => {
 
 export const AppHeader = () => {
   return (
-    <Header height={56}>
+    <Header height={HEADER_HEIGHT}>
       <Container fluid style={{ height: "100%", display: "flex" }}>
         <Group
           my="auto"
