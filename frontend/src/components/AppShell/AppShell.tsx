@@ -1,9 +1,10 @@
 import {
   AppShell as MntAppShell,
-  Header,
   Text,
   useMantineTheme,
 } from "@mantine/core";
+
+import { Header } from "../Header";
 
 export const AppShell = () => {
   const theme = useMantineTheme();
@@ -19,15 +20,7 @@ export const AppShell = () => {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      header={
-        <Header height={{ base: 50, md: 70 }} p="md">
-          <div
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
-          >
-            <Text>HEADER</Text>
-          </div>
-        </Header>
-      }
+      header={<Header />}
     >
       <Text>Gallery previews</Text>
     </MntAppShell>
