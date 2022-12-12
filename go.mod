@@ -2,7 +2,10 @@ module github.com/OlegGulevskyy/wally
 
 go 1.18
 
-require github.com/wailsapp/wails/v2 v2.2.0
+require (
+	github.com/reujab/wallpaper v0.0.0-20210630195606-5f9f655b3740
+	github.com/wailsapp/wails/v2 v2.2.0
+)
 
 require (
 	github.com/bep/debounce v1.2.1 // indirect
@@ -29,6 +32,8 @@ require (
 	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
 	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
 	golang.org/x/text v0.3.7 // indirect
+	gopkg.in/ini.v1 v1.62.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
 // replace github.com/wailsapp/wails/v2 v2.2.0 => /Users/oleggulevskyy
