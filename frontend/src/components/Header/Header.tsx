@@ -1,11 +1,38 @@
-import { Header, Text } from "@mantine/core";
+import { ActionIcon, Container, Group, Header } from "@mantine/core";
+import { IconBrandGithub } from "@tabler/icons";
+import { Searchbar } from "../SearchBar";
+import { ThemeToggle } from "../ThemeToggle";
+import { ICON_SIZE } from "./const";
+
+const GithubButton = () => {
+  return (
+    <ActionIcon variant="outline" color="gray">
+      <IconBrandGithub size={ICON_SIZE} />
+    </ActionIcon>
+  );
+};
 
 export const AppHeader = () => {
   return (
-    <Header height={{ base: 50, md: 70 }} p="md">
-      <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
-        <Text>HA</Text>
-      </div>
+    <Header height={56}>
+      <Container fluid style={{ height: "100%", display: "flex" }}>
+        <Group
+          my="auto"
+          style={{ display: "flex", width: "100%" }}
+          position="apart"
+        >
+          {/* left side */}
+          <div>Wally Logo</div>
+
+					<Searchbar />
+
+          {/* right side */}
+          <Group>
+						<GithubButton />
+            <ThemeToggle />
+          </Group>
+        </Group>
+      </Container>
     </Header>
   );
 };

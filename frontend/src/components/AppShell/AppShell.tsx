@@ -18,8 +18,6 @@ export const AppShell = () => {
               : theme.colors.gray[0],
         },
       }}
-      navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
       header={<Header />}
     >
       <Text>Gallery previews</Text>
