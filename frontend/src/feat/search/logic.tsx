@@ -1,5 +1,6 @@
 import { useHotkeys, useWindowEvent } from "@mantine/hooks";
 import { useState } from "react";
+import { GetImages } from "../../../wailsjs/go/main/App";
 import { MAIN_SEARCH_TRIGGER_SHORTCUT } from "./const";
 
 type UseLogicProps = {
@@ -8,9 +9,18 @@ type UseLogicProps = {
 
 export const useLogic = ({ inputRef }: UseLogicProps) => {
   const [searchReq, setSearchReq] = useState("");
+  const [_, setImages] = useState([]);
 
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchReq(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    GetImages({ query: searchReq }).then((data) => {
+      setImages(data);
+    });
   };
 
   useWindowEvent("keydown", ({ key }) => {
@@ -32,5 +42,6 @@ export const useLogic = ({ inputRef }: UseLogicProps) => {
   return {
     inputValue: searchReq,
     onInput,
+    handleSubmit,
   };
 };

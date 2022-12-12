@@ -4,9 +4,9 @@ import { useRef } from "react";
 import { useLogic } from "./logic";
 
 export const Searchbar = () => {
-	const inputRef = useRef(null);
+  const inputRef = useRef(null);
 
-  const { onInput, inputValue } = useLogic({ inputRef });
+  const { onInput, inputValue, handleSubmit } = useLogic({ inputRef });
 
   const rightSection = (
     <div style={{ display: "flex", alignItems: "center" }}>
@@ -17,15 +17,17 @@ export const Searchbar = () => {
   );
 
   return (
-    <TextInput
-      placeholder="Search wallpapers.."
-      icon={<IconSearch size={16} />}
-      rightSectionWidth={90}
-      rightSection={rightSection}
-      styles={{ rightSection: { pointerEvents: "none" } }}
-			ref={inputRef}
-			value={inputValue}
-			onChange={onInput}
-    />
+    <form onSubmit={handleSubmit}>
+      <TextInput
+        placeholder="Search wallpapers.."
+        icon={<IconSearch size={16} />}
+        rightSectionWidth={90}
+        rightSection={rightSection}
+        styles={{ rightSection: { pointerEvents: "none" } }}
+        ref={inputRef}
+        value={inputValue}
+        onChange={onInput}
+      />
+    </form>
   );
 };
