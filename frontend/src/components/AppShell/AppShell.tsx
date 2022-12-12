@@ -1,9 +1,6 @@
-import {
-  AppShell as MntAppShell,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
+import { AppShell as MntAppShell, useMantineTheme } from "@mantine/core";
 
+import { Gallery } from "../../feat/gallery";
 import { Header } from "../Header";
 
 export const AppShell = () => {
@@ -20,7 +17,7 @@ export const AppShell = () => {
       }}
       header={<Header />}
     >
-      <Text>Gallery previews</Text>
+      <Gallery />
     </MntAppShell>
   );
 };

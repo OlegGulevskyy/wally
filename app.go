@@ -43,23 +43,23 @@ type ImageSrc struct {
 }
 
 type Image struct {
-	Id              string `json:"id"`
-	Url             string `json:"url"`
-	Photographer    string `json:"photographer"`
-	PhotographerUrl string `json:"photographer_url"`
-	Width           int    `json:"width"`
-	Height          int    `json:"height"`
-	Src             ImageSrc
-	Alt             string `json:"alt"`
+	Id              string   `json:"id"`
+	Url             string   `json:"url"`
+	Photographer    string   `json:"photographer"`
+	PhotographerUrl string   `json:"photographer_url"`
+	Width           int      `json:"width"`
+	Height          int      `json:"height"`
+	Src             ImageSrc `json:"src"`
+	Alt             string   `json:"alt"`
 }
 
 type QueryResponse struct {
-	Data []Image
+	Data []Image `json:"data"`
 }
 
 func (a *App) GetImages(opts QueryOptions) QueryResponse {
 	imgs := []Image{}
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 15; i++ {
 		dummyImage := Image{
 			Id:              "1",
 			Url:             "https://www.pexels.com/photo/trees-during-day-3573351/",
