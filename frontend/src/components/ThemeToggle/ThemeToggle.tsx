@@ -13,7 +13,7 @@ export const ThemeToggle = () => {
       onClick={() => toggleColorScheme()}
       title="Toggle color scheme"
     >
-      {dark ? <IconSun size={ICON_SIZE} /> : <IconMoonStars size={18} />}
+      {dark ? <IconSun size={ICON_SIZE} /> : <IconMoonStars size={ICON_SIZE} />}
     </ActionIcon>
   );
 };

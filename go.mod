@@ -1,4 +1,4 @@
-module changeme
+module github.com/OlegGulevskyy/wally
 
 go 1.18
 
