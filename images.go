@@ -86,7 +86,11 @@ func getDummyResponse() QueryResponse {
 		},
 	}
 
-	dummyPhotos := []Image{dummyPhoto}
+	dummyPhotos := []Image{}
+	for i := 0; i < 16; i++ {
+		dummyPhotos = append(dummyPhotos, dummyPhoto)
+	}
+
 	dummyRes := QueryResponse{
 		Photos: dummyPhotos,
 	}
