@@ -1,8 +1,17 @@
 import { useState } from "react";
-import { Card, Image, Grid, createStyles, Button, Group } from "@mantine/core";
+import {
+  Card,
+  Image,
+  Grid,
+  createStyles,
+  Button,
+  Group,
+  Modal,
+} from "@mantine/core";
 import { getGalleryImages as galleryImagesValues } from "./state";
 import type { Image as ImageType } from "./types";
 import { SetWallpaper } from "../../../wailsjs/go/main/App";
+import { Preview } from "../preview";
 
 const useStyles = createStyles(() => ({
   card: {
@@ -24,7 +33,17 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-const ImageCard = ({ src, alt }: ImageType) => {
+type ImageCardProps = {
+  onCardClick: (img: ImageType) => void;
+} & ImageType;
+
+const ImageCard = ({
+  src,
+  alt,
+  photographer,
+  onCardClick,
+  ...rest
+}: ImageCardProps) => {
   const { classes } = useStyles();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -33,54 +52,75 @@ const ImageCard = ({ src, alt }: ImageType) => {
   };
 
   return (
-    <Card
-      shadow="sm"
-      p="xs"
-      radius="md"
-      onMouseEnter={() => setShowMenu(() => true)}
-      onMouseLeave={() => setShowMenu(() => false)}
-      className={classes.card}
-    >
-      <Card.Section>
-        <Image
-          fit="cover"
-          src={src.medium}
-          height={160}
-          alt={alt}
-          radius="md"
-        />
-        {showMenu && (
-          <div className={classes.cardMenu}>
-            <Group noWrap position="center" className={classes.cardButtons}>
-              <Button
-                variant="gradient"
-                onClick={(_) => handleSetAsWallpaper(src.original)}
-              >
-                Set as wallpaper
-              </Button>
+    <>
+      <Card
+        shadow="sm"
+        p="xs"
+        radius="md"
+        onMouseEnter={() => setShowMenu(() => true)}
+        onMouseLeave={() => setShowMenu(() => false)}
+        className={classes.card}
+        onClick={() => onCardClick({ ...rest, src, alt, photographer })}
+      >
+        <Card.Section>
+          <Image
+            fit="cover"
+            src={src.medium}
+            height={160}
+            alt={alt}
+            radius="md"
+          />
+          {showMenu && (
+            <div className={classes.cardMenu}>
+              <Group noWrap position="center" className={classes.cardButtons}>
+                <Button
+                  variant="gradient"
+                  onClick={(_) => handleSetAsWallpaper(src.original)}
+                >
+                  Set as wallpaper
+                </Button>
 
-              {/* disabled for now, later some additional options, maybe */}
-              <Button variant="subtle" color="dark">
-                Options
-              </Button>
-            </Group>
-          </div>
-        )}
-      </Card.Section>
-    </Card>
+                {/* disabled for now, later some additional options, maybe */}
+                <Button variant="subtle" color="dark">
+                  Options
+                </Button>
+              </Group>
+            </div>
+          )}
+        </Card.Section>
+      </Card>
+    </>
   );
 };
 
 export const Gallery = () => {
   const images = galleryImagesValues();
+  const [
+    selectedImageForPreview,
+    setSelectedImageForPreview,
+  ] = useState<ImageType | null>(null);
+
+  const handleImageCardClick = (img: ImageType) => {
+    setSelectedImageForPreview({ ...img });
+  };
 
   // return image cards based on array of images
   return (
     <>
+      <Modal
+        opened={Boolean(selectedImageForPreview)}
+        onClose={() => setSelectedImageForPreview(null)}
+				withCloseButton={false}
+				centered
+				size={"100%"}
+				overlayBlur={5}
+      >
+        {selectedImageForPreview && <Preview image={selectedImageForPreview} />}
+      </Modal>
       <Grid grow gutter="lg">
         {images?.map((image) => (
           <Grid.Col span={4}>
-            <ImageCard {...image} />
+            <ImageCard {...image} onCardClick={handleImageCardClick} />
           </Grid.Col>
         ))}
       </Grid>
