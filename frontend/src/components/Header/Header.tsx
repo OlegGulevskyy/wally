@@ -2,6 +2,7 @@ import { ActionIcon, Container, Group, Header, Tooltip } from "@mantine/core";
 import { IconSettings } from "@tabler/icons";
 import { OpenUrlSystemBrowser } from "../../../wailsjs/go/main/App";
 import { Searchbar } from "../../feat/search";
+import { useAppSettings } from "../../feat/settings";
 import { ThemeToggle } from "../ThemeToggle";
 import { HEADER_HEIGHT, ICON_SIZE } from "./const";
 
@@ -36,9 +37,14 @@ const GithubButton = () => {
 };
 
 const PersonalSettingsButton = () => {
+  const [appSettings, setAppSettings] = useAppSettings();
   return (
     <Tooltip label="Settings">
-      <ActionIcon variant="default" color="lime">
+      <ActionIcon
+        variant="default"
+        color="lime"
+        onClick={() => setAppSettings({ ...appSettings, isOpen: true })}
+      >
         <IconSettings size={ICON_SIZE} />
       </ActionIcon>
     </Tooltip>
