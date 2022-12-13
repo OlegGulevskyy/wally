@@ -42,15 +42,19 @@ type QueryResponse struct {
 	NextPage string  `json:"next_page"`
 }
 
-func queryImages(query string, res *QueryResponse) error {
-	key := "563492ad6f91700001000001e4b85726947c4b0baded58196d40b43c"
+// handle it more gracefully
+func queryImages(query string, apiKey string, res *QueryResponse) error {
+	if apiKey == "" {
+		return nil
+	}
+
 	url := "https://api.pexels.com/v1/search?query=" + query + "&per_page=15&page=1"
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	req.Header.Set("Authorization", key)
+	req.Header.Set("Authorization", apiKey)
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -63,7 +67,7 @@ func queryImages(query string, res *QueryResponse) error {
 
 func (a *App) GetImages(opts QueryOptions) QueryResponse {
 	res := QueryResponse{}
-	queryImages(opts.Query, &res)
+	queryImages(opts.Query, a.GetApiKey(), &res)
 	return res
 	// return getDummyResponse()
 }

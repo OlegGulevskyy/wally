@@ -6,6 +6,7 @@ import {
 } from "@mantine/core";
 
 import { AppShell } from "./components/AppShell";
+import { NotificationsProvider } from "@mantine/notifications";
 
 export const App = () => {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
@@ -22,7 +23,9 @@ export const App = () => {
         withNormalizeCSS
         theme={{ colorScheme }}
       >
-        <AppShell />
+        <NotificationsProvider>
+          <AppShell />
+        </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );
