@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ColorScheme,
   ColorSchemeProvider,
@@ -7,11 +7,21 @@ import {
 
 import { AppShell } from "./components/AppShell";
 import { NotificationsProvider } from "@mantine/notifications";
+import { GetTheme, SetTheme } from "../wailsjs/go/main/App";
 
 export const App = () => {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const toggleColorScheme = (value?: ColorScheme) => {
+    setColorScheme((current) => {
+      const next = value || (current === "dark" ? "light" : "dark");
+      SetTheme(next);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    GetTheme().then((theme) => setColorScheme(theme as ColorScheme));
+  }, []);
 
   return (
     <ColorSchemeProvider
