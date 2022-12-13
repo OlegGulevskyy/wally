@@ -1,3 +1,5 @@
+github.com/OlegGulevskyy/wallpaper v1.0.1-0.20221213102211-3fe824894103 h1:fw4BxwvmvmUt2nkKRCjAA1tY1jp57yl0HXCtKVQvbME=
+github.com/OlegGulevskyy/wallpaper v1.0.1-0.20221213102211-3fe824894103/go.mod h1:maAntvtYaGzVCiomSZ4SsyuPzSmnc0lI38CFENjNhX4=
 github.com/bep/debounce v1.2.1 h1:v67fRdBA9UQu2NhLFXrSg0Brw7CexQekrBwDMM8bzeY=
 github.com/bep/debounce v1.2.1/go.mod h1:H8yggRPQKLUhUoqrJC1bO2xNya7vanpDl7xR3ISbCJ0=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

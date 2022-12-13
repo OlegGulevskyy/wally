@@ -3,7 +3,7 @@ module github.com/OlegGulevskyy/wally
 go 1.18
 
 require (
-	github.com/reujab/wallpaper v0.0.0-20210630195606-5f9f655b3740
+	github.com/OlegGulevskyy/wallpaper v1.0.1-0.20221213102211-3fe824894103
 	github.com/wailsapp/wails/v2 v2.2.0
 )
 
@@ -37,4 +37,4 @@ require (
 )
 
 // replace github.com/wailsapp/wails/v2 v2.2.0 => /Users/oleggulevskyy
-replace github.com/reujab/wallpaper v0.0.0-20210630195606-5f9f655b3740 => /Users/oleggulevskyy/Documents/dev/wallpaper
+// replace github.com/reujab/wallpaper v0.0.0-20210630195606-5f9f655b3740 => /Users/oleggulevskyy/Documents/dev/wallpaper
