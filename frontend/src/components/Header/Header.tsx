@@ -1,10 +1,4 @@
-import {
-  ActionIcon,
-  Container,
-  Group,
-  Header,
-  Tooltip,
-} from "@mantine/core";
+import { ActionIcon, Container, Group, Header, Tooltip } from "@mantine/core";
 import { IconSettings } from "@tabler/icons";
 import { OpenUrlSystemBrowser } from "../../../wailsjs/go/main/App";
 import { Searchbar } from "../../feat/search";
@@ -18,7 +12,7 @@ const GithubSvg = ({ ...props }) => (
     width="22"
     height="22"
     fill="currentColor"
-		{...props}
+    {...props}
   >
     <path
       fill-rule="evenodd"
@@ -33,21 +27,21 @@ const GithubButton = () => {
   };
 
   return (
-		<Tooltip label="Open source">
-    <ActionIcon variant="default" color="gray" onClick={openGhRepoInBrowser}>
-			<GithubSvg height={ICON_SIZE} width={ICON_SIZE} />
-    </ActionIcon>
-		</Tooltip>
+    <Tooltip label="Open source">
+      <ActionIcon variant="default" color="gray" onClick={openGhRepoInBrowser}>
+        <GithubSvg height={ICON_SIZE} width={ICON_SIZE} />
+      </ActionIcon>
+    </Tooltip>
   );
 };
 
 const PersonalSettingsButton = () => {
   return (
-		<Tooltip label="Settings">
-			<ActionIcon variant="default" color="lime">
-				<IconSettings size={ICON_SIZE} />
-			</ActionIcon>
-		</Tooltip>
+    <Tooltip label="Settings">
+      <ActionIcon variant="default" color="lime">
+        <IconSettings size={ICON_SIZE} />
+      </ActionIcon>
+    </Tooltip>
   );
 };
 
