@@ -74,8 +74,6 @@ const ImageCard = ({ src, alt }: ImageType) => {
 export const Gallery = () => {
   const images = galleryImagesValues();
 
-  console.log("IMAGES ", images);
-
   // return image cards based on array of images
   return (
     <>
