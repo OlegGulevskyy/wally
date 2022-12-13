@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/reujab/wallpaper"
+	"github.com/OlegGulevskyy/wallpaper"
 )
 
 func (app *App) SetWallpaper(url string) {
