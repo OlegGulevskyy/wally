@@ -44,7 +44,7 @@ const ImageCard = ({ src, alt }: ImageType) => {
       <Card.Section>
         <Image
           fit="cover"
-          src={src.original}
+          src={src.medium}
           height={160}
           alt={alt}
           radius="md"
