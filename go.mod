@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/OlegGulevskyy/wallpaper v1.0.1-0.20221213102211-3fe824894103
+	github.com/adrg/xdg v0.4.0
 	github.com/pkg/browser v0.0.0-20210706143420-7d21f8c997e2
 	github.com/wailsapp/wails/v2 v2.2.0
 )
