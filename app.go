@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+
+	"github.com/pkg/browser"
 )
 
 // App struct
@@ -18,4 +20,8 @@ func NewApp() *App {
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+}
+
+func (a *App) OpenUrlSystemBrowser(url string) {
+	browser.OpenURL(url)
 }
