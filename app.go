@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/OlegGulevskyy/wally/pkg/config"
 	"github.com/pkg/browser"
