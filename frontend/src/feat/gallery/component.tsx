@@ -7,6 +7,8 @@ import {
   Button,
   Group,
   Modal,
+  Title,
+  Space,
 } from "@mantine/core";
 import { getGalleryImages as galleryImagesValues } from "./state";
 import type { Image as ImageType } from "./types";
@@ -110,16 +112,20 @@ export const Gallery = () => {
       <Modal
         opened={Boolean(selectedImageForPreview)}
         onClose={() => setSelectedImageForPreview(null)}
-				withCloseButton={false}
-				centered
-				size={"100%"}
-				overlayBlur={5}
+        withCloseButton={false}
+        centered
+        size={"100%"}
+        overlayBlur={5}
       >
         {selectedImageForPreview && <Preview image={selectedImageForPreview} />}
       </Modal>
+      <Title order={3} color="dimmed">
+        Let's dig for some wallpapers!
+      </Title>
+      <Space h="md" />
       <Grid grow gutter="lg">
         {images?.map((image) => (
-          <Grid.Col span={4}>
+          <Grid.Col span={4} key={image.url}>
             <ImageCard {...image} onCardClick={handleImageCardClick} />
           </Grid.Col>
         ))}
