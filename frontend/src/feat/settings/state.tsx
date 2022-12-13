@@ -34,23 +34,26 @@ export const useApp = () => {
     getSettingsFromBackend();
   }, []);
 
-  const updateSettings = (settings: Partial<AppSettings>) => {
-    setAppSettings({
-      ...appSettings,
-      ...settings,
-    });
+  const updateSettings = (nextSettings: Partial<AppSettings>) => {
+    setAppSettings((current) => ({ ...current, ...nextSettings }));
   };
 
+  const saveApiKey = () => SetApiKey(appSettings.apiKey ?? "");
+  const saveTheme = (theme: "dark" | "light") => SetTheme(theme);
+
   const updateTheme = (theme: "dark" | "light") => {
-    updateSettings({ theme });
+    console.log("updateTheme", theme);
+    const nextvalue = theme ?? appSettings.theme === "dark" ? "light" : "dark";
+
+    updateSettings({
+      theme: nextvalue,
+    });
+    saveTheme(nextvalue);
   };
 
   const updateApiKey = (apiKey: string) => {
     updateSettings({ apiKey });
   };
-
-  const saveApiKey = () => SetApiKey(appSettings.apiKey ?? "");
-  const saveTheme = () => SetTheme(appSettings.theme);
 
   const toggleAppSettings = (value?: boolean) => {
     setAppSettings((current) => ({
@@ -62,6 +65,7 @@ export const useApp = () => {
   return {
     appSettings,
     setAppSettings,
+    isOpen: appSettings.isOpen,
     toggleAppSettings,
     theme: appSettings.theme,
     updateTheme,
