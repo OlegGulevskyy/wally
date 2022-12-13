@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
 import { Button, PasswordInput, Space } from "@mantine/core";
-import { SetApiKey, GetApiKey } from "../../../wailsjs/go/main/App";
 import { showNotification } from "@mantine/notifications";
+import { useApp } from "./state";
 
 export const Settings = () => {
-  const [apiKeyInput, setApiKeyInput] = useState("");
+  const { apiKey, updateApiKey, saveApiKey } = useApp();
 
   const handleSetApiKey = () => {
-    SetApiKey(apiKeyInput);
+    saveApiKey();
     showNotification({
       title: "API Key Set",
       message: "Your API key has been set",
@@ -16,18 +15,14 @@ export const Settings = () => {
     });
   };
 
-  useEffect(() => {
-    GetApiKey().then((key) => setApiKeyInput(key));
-  }, []);
-
   return (
     <>
       <PasswordInput
         placeholder="API key"
         label="API Keys"
         description="API key from pexels.com to retrieve images"
-        value={apiKeyInput}
-        onChange={(e) => setApiKeyInput(e.target.value)}
+        value={apiKey ?? ""}
+        onChange={(e) => updateApiKey(e.target.value)}
         withAsterisk
       />
       <Space h="md" />

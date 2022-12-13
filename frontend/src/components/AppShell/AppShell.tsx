@@ -1,12 +1,15 @@
 import { AppShell as MntAppShell, Modal, useMantineTheme } from "@mantine/core";
 
 import { Gallery } from "../../feat/gallery";
+import { Onboarding } from "../../feat/onboarding";
 import { Settings, useAppSettings } from "../../feat/settings";
+import { useApp } from "../../feat/settings/state";
 import { Header } from "../Header";
 
 export const AppShell = () => {
   const theme = useMantineTheme();
   const [appSettings, setAppSettingsOpened] = useAppSettings();
+	const { apiKey } = useApp()
 
   return (
     <MntAppShell
@@ -21,13 +24,13 @@ export const AppShell = () => {
       header={<Header />}
     >
       <Modal
-				title="Settings"
+        title="Settings"
         opened={appSettings.isOpen}
         onClose={() => setAppSettingsOpened({ ...appSettings, isOpen: false })}
       >
         <Settings />
       </Modal>
-      <Gallery />
+      {apiKey ? <Gallery /> : <Onboarding />}
     </MntAppShell>
   );
 };
