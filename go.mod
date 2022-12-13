@@ -37,3 +37,4 @@ require (
 )
 
 // replace github.com/wailsapp/wails/v2 v2.2.0 => /Users/oleggulevskyy
+replace github.com/reujab/wallpaper v0.0.0-20210630195606-5f9f655b3740 => /Users/oleggulevskyy/Documents/dev/wallpaper
