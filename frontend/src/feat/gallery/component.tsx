@@ -16,6 +16,7 @@ import type { Image as ImageType } from "./types";
 import { SetWallpaper } from "../../../wailsjs/go/main/App";
 import { Preview } from "../preview";
 import { useImages } from "../../data/useImages";
+import { guid } from "../../utils/guid";
 
 const useStyles = createStyles(() => ({
   card: {
@@ -134,7 +135,7 @@ export const Gallery = () => {
       >
         <Grid grow gutter="lg">
           {allImages?.map((image) => (
-            <Grid.Col span={4} key={image.url}>
+            <Grid.Col span={4} key={guid()}>
               <ImageCard {...image} onCardClick={handleImageCardClick} />
             </Grid.Col>
           ))}
