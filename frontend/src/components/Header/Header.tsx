@@ -3,8 +3,9 @@ import { IconSettings } from "@tabler/icons";
 import { OpenUrlSystemBrowser } from "../../../wailsjs/go/main/App";
 import { Searchbar } from "../../feat/search";
 import { useAppSettings } from "../../feat/settings";
+import { Logo } from "../Logo";
 import { ThemeToggle } from "../ThemeToggle";
-import { HEADER_HEIGHT, ICON_SIZE } from "./const";
+import { HEADER_HEIGHT, ICON_SIZE, LOGO_SIZE } from "./const";
 
 const GithubSvg = ({ ...props }) => (
   <svg
@@ -60,12 +61,10 @@ export const AppHeader = () => {
           style={{ display: "flex", width: "100%" }}
           position="apart"
         >
-          {/* left side */}
-          <div>Wally Logo</div>
+          <Logo width={LOGO_SIZE} />
 
           <Searchbar />
 
-          {/* right side */}
           <Group>
             <PersonalSettingsButton />
             <GithubButton />
