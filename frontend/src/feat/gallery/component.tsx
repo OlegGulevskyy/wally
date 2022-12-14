@@ -56,6 +56,11 @@ const ImageCard = ({
     SetWallpaper(src);
   };
 
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    onCardClick({ ...rest, src, alt, photographer });
+  };
+
   return (
     <>
       <Card
@@ -65,7 +70,6 @@ const ImageCard = ({
         onMouseEnter={() => setShowMenu(() => true)}
         onMouseLeave={() => setShowMenu(() => false)}
         className={classes.card}
-        onClick={() => onCardClick({ ...rest, src, alt, photographer })}
       >
         <Card.Section>
           <Image
@@ -74,13 +78,14 @@ const ImageCard = ({
             height={160}
             alt={alt}
             radius="md"
+            onClick={handleCardClick}
           />
           {showMenu && (
             <div className={classes.cardMenu}>
               <Group noWrap position="center" className={classes.cardButtons}>
                 <Button
                   variant="gradient"
-                  onClick={(_) => handleSetAsWallpaper(src.original)}
+                  onClick={() => handleSetAsWallpaper(src.original)}
                 >
                   Set as wallpaper
                 </Button>
