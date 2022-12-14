@@ -11,6 +11,7 @@ type QueryOptions struct {
 	// keywords to use during search
 	Query string `json:"query"`
 	Size  int    `json:"size"`
+	Page  string `json:"page"`
 }
 
 type ImageSrc struct {
@@ -43,12 +44,18 @@ type QueryResponse struct {
 }
 
 // handle it more gracefully
-func queryImages(query string, apiKey string, res *QueryResponse) error {
+func queryImages(query string, apiKey string, page string, res *QueryResponse) error {
 	if apiKey == "" {
 		return nil
 	}
 
-	url := "https://api.pexels.com/v1/search?query=" + query + "&per_page=15&page=1"
+	var url string
+	if page == "" {
+		url = "https://api.pexels.com/v1/search?query=" + query + "&per_page=15&page=1"
+	} else {
+		url = page
+	}
+
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -67,7 +74,7 @@ func queryImages(query string, apiKey string, res *QueryResponse) error {
 
 func (a *App) GetImages(opts QueryOptions) QueryResponse {
 	res := QueryResponse{}
-	queryImages(opts.Query, a.GetApiKey(), &res)
+	queryImages(opts.Query, a.GetApiKey(), opts.Page, &res)
 	return res
 	// return getDummyResponse()
 }

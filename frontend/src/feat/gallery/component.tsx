@@ -10,10 +10,12 @@ import {
   Title,
   Space,
 } from "@mantine/core";
-import { getGalleryImages as galleryImagesValues } from "./state";
+import InfinitScroll from "react-infinite-scroll-component";
+
 import type { Image as ImageType } from "./types";
 import { SetWallpaper } from "../../../wailsjs/go/main/App";
 import { Preview } from "../preview";
+import { useImages } from "../../data/useImages";
 
 const useStyles = createStyles(() => ({
   card: {
@@ -96,7 +98,8 @@ const ImageCard = ({
 };
 
 export const Gallery = () => {
-  const images = galleryImagesValues();
+  const { hasNextPage, allImages, fetchNextPage } = useImages();
+
   const [
     selectedImageForPreview,
     setSelectedImageForPreview,
@@ -123,13 +126,20 @@ export const Gallery = () => {
         Let's dig for some wallpapers!
       </Title>
       <Space h="md" />
-      <Grid grow gutter="lg">
-        {images?.map((image) => (
-          <Grid.Col span={4} key={image.url}>
-            <ImageCard {...image} onCardClick={handleImageCardClick} />
-          </Grid.Col>
-        ))}
-      </Grid>
+      <InfinitScroll
+        dataLength={allImages?.length ?? 0}
+        next={() => fetchNextPage()}
+        hasMore={hasNextPage}
+        loader={<h4>Loading...</h4>}
+      >
+        <Grid grow gutter="lg">
+          {allImages?.map((image) => (
+            <Grid.Col span={4} key={image.url}>
+              <ImageCard {...image} onCardClick={handleImageCardClick} />
+            </Grid.Col>
+          ))}
+        </Grid>
+      </InfinitScroll>
     </>
   );
 };
