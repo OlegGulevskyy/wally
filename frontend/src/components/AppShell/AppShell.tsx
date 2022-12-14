@@ -1,4 +1,9 @@
-import { AppShell as MntAppShell, Modal, useMantineTheme } from "@mantine/core";
+import {
+  AppShell as MntAppShell,
+  Modal,
+  Stack,
+  useMantineTheme,
+} from "@mantine/core";
 
 import { Gallery } from "../../feat/gallery";
 import { Onboarding } from "../../feat/onboarding";
@@ -19,16 +24,20 @@ export const AppShell = () => {
             theme.colorScheme === "dark"
               ? theme.colors.dark[8]
               : theme.colors.gray[0],
-					position: "relative",
+          position: "relative",
         },
       }}
       header={<Header />}
     >
-      <Modal title="Settings" opened={isOpen} onClose={toggleAppSettings}>
-        <Settings />
-      </Modal>
-      {apiKey ? <Gallery /> : <Onboarding />}
-      <Footer />
+      <Stack style={{ height: "100%" }}>
+        <div style={{ height: "100%", position: "relative" }}>
+          <Modal title="Settings" opened={isOpen} onClose={toggleAppSettings}>
+            <Settings />
+          </Modal>
+          {apiKey ? <Gallery /> : <Onboarding />}
+        </div>
+        <Footer />
+      </Stack>
     </MntAppShell>
   );
 };

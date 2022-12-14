@@ -140,7 +140,7 @@ export const Gallery = () => {
       >
         <Grid grow gutter="lg">
           {allImages?.map((image) => (
-            <Grid.Col span={4} key={guid()}>
+            <Grid.Col md={1} lg={2} span={4} key={guid()}>
               <ImageCard {...image} onCardClick={handleImageCardClick} />
             </Grid.Col>
           ))}
