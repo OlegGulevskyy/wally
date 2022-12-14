@@ -22,10 +22,7 @@ export const useImages = () => {
       fetchImages({ query: searchQuery, size: 0, page: pageParam }),
     {
       enabled: false,
-      getNextPageParam: (lastPage) => {
-        console.log("lastPage", lastPage);
-        return lastPage.next_page;
-      },
+      getNextPageParam: (lastPage) => lastPage.next_page,
     }
   );
 
