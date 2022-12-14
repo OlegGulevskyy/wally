@@ -42,7 +42,6 @@ export const useApp = () => {
   const saveTheme = (theme: "dark" | "light") => SetTheme(theme);
 
   const updateTheme = (theme: "dark" | "light") => {
-    console.log("updateTheme", theme);
     const nextvalue = theme ?? appSettings.theme === "dark" ? "light" : "dark";
 
     updateSettings({
