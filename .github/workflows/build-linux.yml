@@ -1,4 +1,4 @@
-name: "build"
+name: "build-linux"
 on:
   push:
     branches: ["ci-pipe"]
@@ -24,21 +24,11 @@ jobs:
           node-version: 14
       - name: Get Wails
         run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+      - name: Install webkit
+        run: sudo apt-get install -y libwebkit2gtk-4.0-dev
       - name: Build Wails app
         run: |
           wails build
-      - name: upload artifacts macOS
-        if: matrix.platform == 'macos-latest'
-        uses: actions/upload-artifact@v2
-        with:
-          name: wally-macos
-          path: build/bin/*
-      - name: upload artifacts windows
-        if: matrix.platform == 'windows-latest'
-        uses: actions/upload-artifact@v2
-        with:
-          name: wall-windows
-          path: build/bin/*
       - name: upload artifacts linux
         if: matrix.platform == 'ubuntu-latest'
         uses: actions/upload-artifact@v2
