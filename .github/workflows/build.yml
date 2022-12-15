@@ -9,7 +9,7 @@ jobs:
   package:
     strategy:
       matrix:
-        platform: [windows-latest, macos-latest]
+        platform: [windows-latest, macos-latest, ubuntu-latest]
         go-version: [1.18]
     runs-on: ${{ matrix.platform }}
     steps:
@@ -31,11 +31,17 @@ jobs:
         if: matrix.platform == 'macos-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: wails-binaries-macos
+          name: wally-macos
           path: build/bin/*
       - name: upload artifacts windows
         if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: wails-binaries-windows
+          name: wall-windows
+          path: build/bin/*
+      - name: upload artifacts linux
+        if: matrix.platform == 'ubuntu-latest'
+        uses: actions/upload-artifact@v2
+        with:
+          name: wally-linux
           path: build/bin/*
