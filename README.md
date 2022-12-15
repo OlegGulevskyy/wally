@@ -4,7 +4,7 @@
 
 This is a toy project to build a Desktop cross-platform application, that serves as unofficial Pexel.com client. This allows you to browse images, preview them and set them as Desktop wallpapers, without the trouble of downloading each image, and manually set it up as wallpaper. 
 
-### Theme switch support
+### Set any images as wallpaper
 
 ![set any image](https://i.imgur.com/t0Iq5L2.png)
 
