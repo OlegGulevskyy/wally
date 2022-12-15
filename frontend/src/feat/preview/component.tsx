@@ -1,5 +1,5 @@
 import { Box, Image } from "@mantine/core";
-import type { Image as ImageType } from "../gallery/types";
+import type { ImageType as ImageType } from "../gallery/types";
 
 type PreviewProps = {
   image: ImageType;

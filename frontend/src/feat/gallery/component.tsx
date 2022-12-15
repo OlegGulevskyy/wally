@@ -3,7 +3,6 @@ import {
   Card,
   Image,
   Grid,
-  createStyles,
   Button,
   Group,
   Modal,
@@ -12,35 +11,12 @@ import {
 } from "@mantine/core";
 import InfinitScroll from "react-infinite-scroll-component";
 
-import type { Image as ImageType } from "./types";
+import type { ImageCardProps, ImageType } from "./types";
+import { useStyles } from "./styles";
 import { SetWallpaper } from "../../../wailsjs/go/main/App";
 import { Preview } from "../preview";
 import { useImages } from "../../data/useImages";
 import { guid } from "../../utils/guid";
-
-const useStyles = createStyles(() => ({
-  card: {
-    position: "relative",
-  },
-  cardMenu: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    height: "100%",
-    width: "100%",
-    background: "rgba(0, 0, 0, 0.5)",
-  },
-  cardButtons: {
-    position: "absolute",
-    top: "70%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  },
-}));
-
-type ImageCardProps = {
-  onCardClick: (img: ImageType) => void;
-} & ImageType;
 
 const ImageCard = ({
   src,

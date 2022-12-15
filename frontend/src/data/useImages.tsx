@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { GetImages } from "../../wailsjs/go/main/App";
-import { Image } from "../feat/gallery/types";
+import { ImageType } from "../feat/gallery/types";
 import { useSearchQuery } from "../feat/search/state";
 
 type FetchImagesProps = {
@@ -30,7 +30,7 @@ export const useImages = () => {
 	const allImages = useMemo(() => {
 		return data?.pages.reduce((acc, page) => {
 			return [...acc, ...page.photos]
-		}, [] as Image[])
+		}, [] as ImageType[])
 	}, [data?.pages])
 
   return {

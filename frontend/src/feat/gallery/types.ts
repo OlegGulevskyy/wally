@@ -1,4 +1,4 @@
-export type Image = {
+export type ImageType = {
   id: string;
   url: string;
   photographer: string;
@@ -16,3 +16,7 @@ export type Image = {
   };
   alt: string;
 };
+
+export type ImageCardProps = {
+  onCardClick: (img: ImageType) => void;
+} & ImageType;

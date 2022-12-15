@@ -1,7 +1,7 @@
 import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { Image } from "./types";
+import { ImageType } from "./types";
 
-export const galleryImagesAtom = atom<Image[] | []>([]);
+export const galleryImagesAtom = atom<ImageType[] | []>([]);
 export const setGalleryImages = () => useSetAtom(galleryImagesAtom);
 export const getGalleryImages = () => useAtomValue(galleryImagesAtom);
 
