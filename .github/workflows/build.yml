@@ -27,6 +27,20 @@ jobs:
       - name: Build Wails app
         run: |
           wails build
+      - name: Codesign executable
+        env: 
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+        run: |
+          echo $MACOS_CERTIFICATE | base64 —decode > certificate.p12
+            security create-keychain -p PASSWORD_123 build.keychain
+            security default-keychain -s build.keychain
+            security unlock-keychain -p PASSWORD_123 build.keychain
+            security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+            security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k PASSWORD_123 build.keychain
+            echo security find-identity -v
+            /usr/bin/codesign --force -s <identity-id> ./build/bin/Wally.app -v
+      
       - name: upload artifacts macOS
         if: matrix.platform == 'macos-latest'
         uses: actions/upload-artifact@v2
