@@ -52,12 +52,15 @@ const ImageCard = ({
   const { classes } = useStyles();
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleSetAsWallpaper = (src: string) => {
+  const handleSetAsWallpaper = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    src: string
+  ) => {
+    e.stopPropagation();
     SetWallpaper(src);
   };
 
-  const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
+  const handleCardClick = () => {
     onCardClick({ ...rest, src, alt, photographer });
   };
 
@@ -70,6 +73,7 @@ const ImageCard = ({
         onMouseEnter={() => setShowMenu(() => true)}
         onMouseLeave={() => setShowMenu(() => false)}
         className={classes.card}
+        onClick={handleCardClick}
       >
         <Card.Section>
           <Image
@@ -78,14 +82,13 @@ const ImageCard = ({
             height={160}
             alt={alt}
             radius="md"
-            onClick={handleCardClick}
           />
           {showMenu && (
-            <div className={classes.cardMenu}>
+            <div className={classes.cardMenu} onClick={handleCardClick}>
               <Group noWrap position="center" className={classes.cardButtons}>
                 <Button
                   variant="gradient"
-                  onClick={() => handleSetAsWallpaper(src.original)}
+                  onClick={(e) => handleSetAsWallpaper(e, src.original)}
                 >
                   Set as wallpaper
                 </Button>
@@ -140,7 +143,7 @@ export const Gallery = () => {
       >
         <Grid grow gutter="lg">
           {allImages?.map((image) => (
-            <Grid.Col md={1} lg={2} span={4} key={guid()}>
+            <Grid.Col md={5} lg={3} key={guid()}>
               <ImageCard {...image} onCardClick={handleImageCardClick} />
             </Grid.Col>
           ))}
