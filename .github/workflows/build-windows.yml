@@ -1,7 +1,7 @@
 name: "build-windows"
 on:
   push:
-    branches: ["ci-pipe"]
+    # branches: ["ci-pipe"]
   workflow_dispatch:
     # This Action only starts when you go to Actions and manually run the workflow.
 
@@ -27,8 +27,7 @@ jobs:
       - name: Build Wails app
         run: |
           wails build
-      - name: upload artifacts windows
-        if: matrix.platform == 'windows-latest'
+      - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: wall-windows

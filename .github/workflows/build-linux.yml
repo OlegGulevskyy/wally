@@ -9,7 +9,7 @@ jobs:
   package:
     strategy:
       matrix:
-        platform: [windows-latest, macos-latest, ubuntu-latest]
+        platform: [ubuntu-latest]
         go-version: [1.18]
     runs-on: ${{ matrix.platform }}
     steps:
@@ -25,12 +25,11 @@ jobs:
       - name: Get Wails
         run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
       - name: Install webkit
-        run: sudo apt-get install -y libwebkit2gtk-4.0-dev
+        run: apt-get install -y libwebkit2gtk-4.0-dev
       - name: Build Wails app
         run: |
           wails build
-      - name: upload artifacts linux
-        if: matrix.platform == 'ubuntu-latest'
+      - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: wally-linux
