@@ -1,7 +1,9 @@
 name: "build"
 on:
-  release:
-    types: [created]
+  push:
+    branches: [signing-mac]
+  # release:
+  #   types: [created]
   workflow_dispatch:
     # This Action only starts when you go to Actions and manually run the workflow.
 
