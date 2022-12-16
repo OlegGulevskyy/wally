@@ -42,7 +42,7 @@ jobs:
           security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k PASSWORD_123 build.keychain
           security find-identity -v
-          /usr/bin/codesign --force -s <identity-id> ./build/bin/Wally.app -v
+          /usr/bin/codesign --force -s build.keychain ./build/bin/Wally.app -v
       
       - name: upload artifacts macOS
         if: matrix.platform == 'macos-latest'
