@@ -1,9 +1,7 @@
 name: "build"
 on:
-  release:
-    types: [created]
-  workflow_dispatch:
-    # This Action only starts when you go to Actions and manually run the workflow.
+  push:
+    branches: [master]
 
 jobs:
   package:
@@ -27,6 +25,23 @@ jobs:
       - name: Build Wails app
         run: |
           wails build
+      - name: Codesign executable
+        if: matrix.platform == 'macos-latest'
+        env: 
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+          MACOS_IDENTITY_ID: ${{ secrets.MACOS_IDENTITY_ID }}
+          MACOS_SIGN_PASSWORD: ${{ secrets.MACOS_SIGN_PASSWORD }}
+        run: |
+          echo $MACOS_CERTIFICATE | base64 -d > certificate.p12
+          security create-keychain -p $MACOS_SIGN_PASSWORD build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p $MACOS_SIGN_PASSWORD build.keychain
+          security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_SIGN_PASSWORD build.keychain
+          security find-identity -v
+          /usr/bin/codesign --force -s $MACOS_IDENTITY_ID ./build/bin/Wally.app -v
+      
       - name: upload artifacts macOS
         if: matrix.platform == 'macos-latest'
         uses: actions/upload-artifact@v2
