@@ -34,6 +34,7 @@ jobs:
         env: 
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+          MACOS_IDENTITY_ID: ${{ secrets.MACOS_IDENTITY_ID }}
         run: |
           echo $MACOS_CERTIFICATE | base64 -d > certificate.p12
           security create-keychain -p PASSWORD_123 build.keychain
@@ -42,7 +43,7 @@ jobs:
           security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k PASSWORD_123 build.keychain
           security find-identity -v
-          /usr/bin/codesign --force -s build.keychain ./build/bin/Wally.app -v
+          /usr/bin/codesign --force -s $MACOS_IDENTITY_ID ./build/bin/Wally.app -v
       
       - name: upload artifacts macOS
         if: matrix.platform == 'macos-latest'
