@@ -35,13 +35,14 @@ jobs:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
           MACOS_IDENTITY_ID: ${{ secrets.MACOS_IDENTITY_ID }}
+          MACOS_SIGN_PASSWORD: ${{ secrets.MACOS_SIGN_PASSWORD }}
         run: |
           echo $MACOS_CERTIFICATE | base64 -d > certificate.p12
-          security create-keychain -p PASSWORD_123 build.keychain
+          security create-keychain -p $MACOS_SIGN_PASSWORD build.keychain
           security default-keychain -s build.keychain
-          security unlock-keychain -p PASSWORD_123 build.keychain
+          security unlock-keychain -p $MACOS_SIGN_PASSWORD build.keychain
           security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k PASSWORD_123 build.keychain
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $MACOS_SIGN_PASSWORD build.keychain
           security find-identity -v
           /usr/bin/codesign --force -s $MACOS_IDENTITY_ID ./build/bin/Wally.app -v
       
